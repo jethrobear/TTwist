@@ -1,29 +1,23 @@
 package net.furrybrigade.ttwist;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatToggleButton;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import org.apache.commons.lang3.ArrayUtils;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Logger;
 
-public class CluesLayout extends ConstraintLayout implements View.OnClickListener {
-    private List<ButtonState> clues;
+public class CluesLayout extends ConstraintLayout implements AppCompatToggleButton.OnCheckedChangeListener {
     private Submittable submittable;
-
     static final int[] buttonIds = new int[]{R.id.btnClue1, R.id.btnClue2, R.id.btnClue3,
             R.id.btnClue4, R.id.btnClue5, R.id.btnClue6, R.id.btnClue7, R.id.btnClue8};
 
@@ -55,7 +49,14 @@ public class CluesLayout extends ConstraintLayout implements View.OnClickListene
         findViewById(R.id.btnShuffle).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                randomize();
+                // Collect serialized data
+                List<String> states = new ArrayList<>();
+                for (int buttonId : buttonIds)
+                    states.add(((ToggleClueButton) findViewById(buttonId)).serializeState());
+                Collections.shuffle(states);
+                for (int idx = 0; idx < states.size(); idx++)
+                    ((ToggleClueButton) findViewById(buttonIds[idx])).deserializeState(states.get(idx));
+                ((TextView) findViewById(R.id.txtClueGuess)).setText(getStringValue());
             }
         });
         findViewById(R.id.btnClear).setOnClickListener(new View.OnClickListener() {
@@ -68,17 +69,16 @@ public class CluesLayout extends ConstraintLayout implements View.OnClickListene
             @Override
             public void onClick(View v) {
                 int lastIndex = 0;
-                for(ButtonState buttonState : clues){
-                    if(!buttonState.state)
+                for (int buttonId : buttonIds) {
+                    if (((ToggleClueButton) findViewById(buttonId)).isChecked())
                         lastIndex++;
                 }
-                if(lastIndex > 0) {
-                    for (int idx = 0; idx < clues.size(); idx++)
-                        if (clues.get(idx).selectionIndex == lastIndex - 1) {
-                            clues.get(idx).toggleState(-1);
-                            break;
-                        }
-                    updateLayout();
+                for (int buttonId : buttonIds) {
+                    ToggleClueButton clue = findViewById(buttonId);
+                    if (clue.selectionIndex == lastIndex) {
+                        clue.clearState();
+                        break;
+                    }
                 }
             }
         });
@@ -89,46 +89,28 @@ public class CluesLayout extends ConstraintLayout implements View.OnClickListene
             }
         });
         for (int viewId : buttonIds)
-            findViewById(viewId).setOnClickListener(this);
+            ((ToggleClueButton) findViewById(viewId)).setOnCheckedChangeListener(this);
     }
 
     public void setClues(List<String> clues) {
-        this.clues = new ArrayList<>();
-        for (String stx : clues)
-            this.clues.add(new ButtonState(stx));
-        updateLayout();
-    }
-
-    public void randomize() {
-        Collections.shuffle(clues);
-        updateLayout();
+        // TODO: This can cause a mismatch in the number of clues and buttons
+        for (int idx = 0; idx < clues.size(); idx++)
+            ((Button) (findViewById(buttonIds[idx]))).setText(clues.get(idx));
     }
 
     public void clear() {
-        for (ButtonState clue : clues)
-            clue.clearState();
-        updateLayout();
-    }
-
-    private void updateLayout() {
-        for (int idx = 0; idx < WordIterface.MAXIMUM_WORD_GUESS; idx++) {
-            Button buttonWidget = findViewById(buttonIds[idx]);
-            buttonWidget.setText(clues.get(idx).label);
-
-            buttonWidget.setBackgroundColor(Color.RED);
-            if (clues.get(idx).state)
-                buttonWidget.setBackgroundColor(Color.GREEN);
-
-            ((TextView) findViewById(R.id.txtClueGuess)).setText(getStringValue());
-        }
+        for (int buttonId : buttonIds)
+            ((ToggleClueButton) findViewById(buttonId)).clearState();
+        ((TextView) findViewById(R.id.txtClueGuess)).setText(getStringValue());
     }
 
     private String getStringValue() {
         StringBuilder stringBuilder = new StringBuilder();
         String[] stringConcat = new String[WordIterface.MAXIMUM_WORD_GUESS];
-        for (ButtonState clue : clues) {
-            if (clue.selectionIndex > -1)
-                stringConcat[clue.selectionIndex] = clue.label;
+        for (int buttonId : buttonIds) {
+            ToggleClueButton clue = findViewById(buttonId);
+            if (clue.isChecked())
+                stringConcat[clue.selectionIndex - 1] = clue.getText().toString();
         }
         for (String chx : stringConcat)
             if (chx != null)
@@ -141,14 +123,13 @@ public class CluesLayout extends ConstraintLayout implements View.OnClickListene
     }
 
     @Override
-    public void onClick(View v) {
-        int idx = ArrayUtils.indexOf(buttonIds, v.getId());
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         int lastIndex = 0;
-        for(ButtonState buttonState : clues){
-            if(!buttonState.state)
+        for (int buttonId : buttonIds) {
+            if (((ToggleClueButton) findViewById(buttonId)).isChecked())
                 lastIndex++;
         }
-        clues.get(idx).toggleState(lastIndex);
-        updateLayout();
+        ((ToggleClueButton) findViewById(buttonView.getId())).setSelectionIndex(lastIndex);
+        ((TextView) findViewById(R.id.txtClueGuess)).setText(getStringValue());
     }
 }
