@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">TTwist</string>
+    <string name="btnShuffle">Shuffle</string>
+    <string name="lblPoint">Point</string>
+
+    <string name="holderWordGuess">ABCDEFGH</string>
+    <string name="holderSingleChar">X</string>
+
+    <string name="submitDescription">submit_logo</string>
+    <string name="clearDescription">clear_logo</string>
+    <string name="backspaceDescription">backspace_logo</string>
+</resources>
