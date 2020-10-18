@@ -20,38 +20,40 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
     @Test
-    public void testTextReader(){
+    public void testTextReader() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         try {
-            WordIterface iface = new WordIterface(appContext);
+            Dictionary iface = new Dictionary(appContext);
             assertFalse(iface.readTextFile().isEmpty());
-        }catch (Exception e){
+        } catch (Exception e) {
             fail();
         }
     }
 
     @Test
-    public void testGenerateLetterList(){
+    public void testGenerateLetterList() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         try {
-            WordIterface iface = new WordIterface(appContext);
-            List result = iface.generateRandomLetters();
+            Dictionary iface = new Dictionary(appContext);
+            List max = iface.readTextFile();
+            List result = iface.generateRandomLettersFromMax(max);
             System.out.print(result);
             assertFalse(result.isEmpty());
-        }catch (Exception e){
+        } catch (Exception e) {
             fail();
         }
     }
 
     @Test
-    public void testGetClues(){
+    public void testGetClues() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         try {
-            WordIterface iface = new WordIterface(appContext);
-            List clues = iface.generateRandomLetters();
+            Dictionary iface = new Dictionary(appContext);
+            List max = iface.readTextFile();
+            List clues = iface.generateRandomLettersFromMax(max);
             List result = iface.getWordsFromClues(iface.readTextFile(), clues);
             assertFalse(result.isEmpty());
-        }catch (Exception e){
+        } catch (Exception e) {
             fail();
         }
     }

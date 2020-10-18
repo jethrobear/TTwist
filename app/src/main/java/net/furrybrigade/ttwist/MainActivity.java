@@ -1,18 +1,12 @@
 package net.furrybrigade.ttwist;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.TextView;
-
-import com.google.common.collect.Iterables;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements Submittable {
@@ -27,10 +21,10 @@ public class MainActivity extends AppCompatActivity implements Submittable {
 
         // Get the stage's information
         try {
-            WordIterface wordIterface = new WordIterface(getApplicationContext());
-            List<WordDefinition> dictionaryList = wordIterface.readTextFile();
-            clues = wordIterface.generateRandomLettersFromMax(dictionaryList);
-            wordList = wordIterface.getWordsFromClues(dictionaryList, clues);
+            Dictionary dictionary = new Dictionary(getApplicationContext());
+            List<WordDefinition> dictionaryList = dictionary.readTextFile();
+            clues = dictionary.generateRandomLettersFromMax(dictionaryList);
+            wordList = dictionary.getWordsFromClues(dictionaryList, clues);
 
             // Place clues in the Clue Layout
             CluesLayout cluesLayout = findViewById(R.id.cluesFragment);

@@ -42,6 +42,10 @@ public class CluesLayout extends ConstraintLayout implements AppCompatToggleButt
         init(context);
     }
 
+    /**
+     * Initialize the Clue Form
+     * @param context Parent context
+     */
     public void init(Context context) {
         inflate(context, R.layout.clue_layout, this);
 
@@ -92,21 +96,35 @@ public class CluesLayout extends ConstraintLayout implements AppCompatToggleButt
             ((ToggleClueButton) findViewById(viewId)).setOnCheckedChangeListener(this);
     }
 
+    /**
+     * Set the characters that can be played on the current state
+     * @param clues List of characters to play with
+     */
     public void setClues(List<String> clues) {
         // TODO: This can cause a mismatch in the number of clues and buttons
         for (int idx = 0; idx < clues.size(); idx++)
             ((Button) (findViewById(buttonIds[idx]))).setText(clues.get(idx));
     }
 
+    /**
+     * Clear form's content
+     * Reset the states of all the defined ToggleClueButton, effectively clearing the
+     * clue form's state
+     */
     public void clear() {
         for (int buttonId : buttonIds)
             ((ToggleClueButton) findViewById(buttonId)).clearState();
         ((TextView) findViewById(R.id.txtClueGuess)).setText(getStringValue());
     }
 
+    /**
+     * Iterate all of the defined ToggleClueButtons inside the Clues Form and recreate the order
+     * of the button presses
+     * @return String from the pressed ToggleClueButtons
+     */
     private String getStringValue() {
         StringBuilder stringBuilder = new StringBuilder();
-        String[] stringConcat = new String[WordIterface.MAXIMUM_WORD_GUESS];
+        String[] stringConcat = new String[Dictionary.MAXIMUM_WORD_GUESS];
         for (int buttonId : buttonIds) {
             ToggleClueButton clue = findViewById(buttonId);
             if (clue.isChecked())
@@ -118,6 +136,10 @@ public class CluesLayout extends ConstraintLayout implements AppCompatToggleButt
         return stringBuilder.toString();
     }
 
+    /**
+     * Set the callable interface to pass the player's word that needs to be checked
+     * @param submittable Callable interfaced object
+     */
     public void setSubmitListener(Submittable submittable) {
         this.submittable = submittable;
     }
