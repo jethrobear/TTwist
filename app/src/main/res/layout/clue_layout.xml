@@ -12,12 +12,13 @@
         android:text="@string/holderWordGuess"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toTopOf="@id/btnClue1"
-        app:layout_constraintEnd_toStartOf="@id/btnBackspace"
+        app:layout_constraintEnd_toStartOf="@id/btnSubmit"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/btnSubmit"
+        style="@style/pressableImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/submitDescription"
@@ -29,6 +30,7 @@
 
     <ImageButton
         android:id="@+id/btnBackspace"
+        style="@style/pressableImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/backspaceDescription"
@@ -40,6 +42,7 @@
 
     <ImageButton
         android:id="@+id/btnClear"
+        style="@style/pressableImageButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/clearDescription"
@@ -139,12 +142,12 @@
 
     <Button
         android:id="@+id/btnShuffle"
+        style="@style/pressableButton.Big"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/btnShuffle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnClue1"
-        style="@style/pressableButton.Big"/>
+        app:layout_constraintTop_toBottomOf="@id/btnClue1" />
 </androidx.constraintlayout.widget.ConstraintLayout>
