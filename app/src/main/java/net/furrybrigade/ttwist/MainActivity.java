@@ -1,10 +1,11 @@
 package net.furrybrigade.ttwist;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
+import com.google.android.flexbox.FlexboxLayoutManager;
 
 import java.io.IOException;
 import java.util.List;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements Submittable {
 
             // Place the word list
             ((RecyclerView) findViewById(R.id.wordlistLayout)).setLayoutManager(
-                    new LinearLayoutManager(this));
+                    new FlexboxLayoutManager(this));
             ((RecyclerView) findViewById(R.id.wordlistLayout)).setAdapter(
                     new WordListAdapter(wordList));
         } catch (IOException ioe) {
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements Submittable {
                     points += wordList.get(idx).word.length();
                     ((ScoreboardLayout) findViewById(R.id.scoreboardLayout)).setPoints(points);
                 }
-                wordList.get(idx).setGuessed();
+                wordList.get(idx).isGuessed = true;
                 ((RecyclerView) findViewById(R.id.wordlistLayout)).setAdapter(
                         new WordListAdapter(wordList));
                 findViewById(R.id.wordlistLayout).invalidate();

@@ -19,9 +19,29 @@
         android:id="@+id/txtPoint"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="0"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/holderSingleChar"
+        app:layout_constraintEnd_toStartOf="@id/lblWordCount"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/lblPoint"/>
+
+    <TextView
+        android:id="@+id/lblWordCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lblWordCount"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/txtWordCount"
+        app:layout_constraintStart_toEndOf="@id/txtPoint"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtWordCount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/holderSingleChar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/lblWordCount"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

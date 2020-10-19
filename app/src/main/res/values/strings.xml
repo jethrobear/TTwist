@@ -2,8 +2,10 @@
     <string name="app_name">TTwist</string>
     <string name="btnShuffle">Shuffle</string>
     <string name="lblPoint">Point</string>
+    <string name="lblWordCount">Words found</string>
 
     <string name="holderWordGuess" />
+    <string name="holderBlanks">□</string>
     <string name="holderSingleChar">X</string>
 
     <string name="submitDescription">submit_logo</string>

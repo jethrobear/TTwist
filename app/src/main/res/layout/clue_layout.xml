@@ -51,6 +51,7 @@
 
     <net.furrybrigade.ttwist.ToggleClueButton
         android:id="@+id/btnClue1"
+        style="@style/toggleButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/holderSingleChar"
@@ -61,6 +62,7 @@
 
     <net.furrybrigade.ttwist.ToggleClueButton
         android:id="@+id/btnClue2"
+        style="@style/toggleButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/holderSingleChar"
@@ -71,6 +73,7 @@
 
     <net.furrybrigade.ttwist.ToggleClueButton
         android:id="@+id/btnClue3"
+        style="@style/toggleButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/holderSingleChar"
@@ -81,6 +84,7 @@
 
     <net.furrybrigade.ttwist.ToggleClueButton
         android:id="@+id/btnClue4"
+        style="@style/toggleButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/holderSingleChar"
@@ -91,6 +95,7 @@
 
     <net.furrybrigade.ttwist.ToggleClueButton
         android:id="@+id/btnClue5"
+        style="@style/toggleButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/holderSingleChar"
@@ -101,6 +106,7 @@
 
     <net.furrybrigade.ttwist.ToggleClueButton
         android:id="@+id/btnClue6"
+        style="@style/toggleButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/holderSingleChar"
@@ -111,6 +117,7 @@
 
     <net.furrybrigade.ttwist.ToggleClueButton
         android:id="@+id/btnClue7"
+        style="@style/toggleButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/holderSingleChar"
@@ -121,6 +128,7 @@
 
     <net.furrybrigade.ttwist.ToggleClueButton
         android:id="@+id/btnClue8"
+        style="@style/toggleButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/holderSingleChar"
@@ -137,5 +145,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnClue1" />
+        app:layout_constraintTop_toBottomOf="@id/btnClue1"
+        style="@style/pressableButton.Big"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
